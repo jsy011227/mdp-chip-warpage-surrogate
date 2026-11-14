@@ -51,7 +51,7 @@ def eqs(ax, title, lines):
         if kind == "h":      # 소제목
             ax.text(0, y, t, fontsize=10.5, color=(0, 0, 0, .6), va="top"); y -= .085
         elif kind == "m":    # 수식
-            ax.text(.03, y, t, fontsize=14.5, va="top"); y -= .135
+            ax.text(.03, y, t, fontsize=12.5, va="top"); y -= .135
         else:                # 설명
             ax.text(.03, y, t, fontsize=10.5, va="top"); y -= .085
 
@@ -123,51 +123,50 @@ def si_cell(ax, top):
     arrow(ax, P(x0 + W, D / 2, zc), P(x0 + W + 1.3, D / 2, zc), both=True)               # +x
     arrow(ax, P(x0 + W / 2, -1.3, zc), P(x0 + W / 2, 0, zc), both=True, alpha=.6)        # -y (앞)
     arrow(ax, P(x0 + W / 2, D, zc), P(x0 + W / 2, D + 1.0, zc), both=True, alpha=.6)     # +y (뒤)
-    ax.text(*(P(x0 - 1.3, D / 2, zc) + [0, .15]), "$G_{xy}$ (x)", fontsize=11)
+    ax.text(*(P(x0 - 1.3, D / 2, zc) + [0, .15]), "$Q_x$", fontsize=11)
     bb = dict(fc="white", ec="none", pad=1.2, alpha=.9)
-    ax.text(*(P(x0 + W + 1.0, D / 2, zc) + [0, .15]), "$G_{xy}$ (x)", fontsize=11, bbox=bb)
-    ax.text(*(P(x0 + W / 2, -1.3, zc) + [-.1, -.32]), "$G_{xy}$ (y)", fontsize=10, color=(0, 0, 0, .75), bbox=bb)
-    ax.text(*(P(x0 + W / 2, D + 1.0, zc) + [.12, .02]), "$G_{xy}$ (y)", fontsize=10, color=(0, 0, 0, .75), bbox=bb)
+    ax.text(*(P(x0 + W + 1.0, D / 2, zc) + [0, .15]), "$Q_x$", fontsize=11, bbox=bb)
+    ax.text(*(P(x0 + W / 2, -1.3, zc) + [-.1, -.32]), "$Q_y$", fontsize=10.5, color=(0, 0, 0, .75), bbox=bb)
+    ax.text(*(P(x0 + W / 2, D + 1.0, zc) + [.12, .02]), "$Q_y$", fontsize=10.5, color=(0, 0, 0, .75), bbox=bb)
     o = np.array([-.05, 2.55])                                                          # 좌표축
     for v, t in [((.5, 0), "x"), ((ca * .7, sa * .7), "y"), ((0, .5), "z")]:
         arrow(ax, o, o + v, lw=1, ms=8, alpha=.6); ax.text(*(o + np.array(v) * 1.25), t, fontsize=9, alpha=.7)
     ax.plot(*c, "o", color=K, ms=5)
-    ax.text(c[0] + .12, c[1] - .25, "$T_i$", fontsize=11.5)
+    ax.text(c[0] + .12, c[1] - .25, "$T_{m,n,l}$", fontsize=11.5)
     if top:
         arrow(ax, P(x0 + W / 2, D / 2, H), P(x0 + W / 2, D / 2, H + 1.0), color=COOL)
-        ax.text(P(x0 + W / 2, D / 2, H + .6)[0] + .15, P(0, D / 2, H + .6)[1], "$G_{top}$ → TIM", fontsize=11, color=COOL)
+        ax.text(P(x0 + W / 2, D / 2, H + .6)[0] + .15, P(0, D / 2, H + .6)[1], "$Q_{conv}$ → TIM", fontsize=11, color=COOL)
         arrow(ax, P(x0 + W / 2, D / 2, -1.05), P(x0 + W / 2, D / 2, 0))
-        ax.text(P(x0 + W / 2, D / 2, -.6)[0] + .15, P(0, D / 2, -.6)[1], "$G_z$ (아랫층에서)", fontsize=11)
+        ax.text(P(x0 + W / 2, D / 2, -.6)[0] + .15, P(0, D / 2, -.6)[1], "$Q_z$ (l=1 절점에서)", fontsize=11)
     else:
         arrow(ax, P(x0 + W / 2, D / 2, H), P(x0 + W / 2, D / 2, H + 1.0))
-        ax.text(P(x0 + W / 2, D / 2, H + .6)[0] + .15, P(0, D / 2, H + .6)[1], "$G_z$ (윗층으로)", fontsize=11)
+        ax.text(P(x0 + W / 2, D / 2, H + .6)[0] + .15, P(0, D / 2, H + .6)[1], "$Q_z$ (l=2 절점으로)", fontsize=11)
         for xx in np.linspace(x0 + .3, x0 + W - .3, 4):
             arrow(ax, P(xx, 0, -.75), P(xx, 0, -.03), color=HEAT, lw=1.6, ms=11)
-        ax.text(x0 + W + .35, -.55, r"발열 $q(x,y)\,\Delta x^2$", fontsize=11, color=HEAT)
+        ax.text(x0 + W + .35, -.55, r"$\dot{E}_{in} = q''_{m,n}\,\Delta x\,\Delta y$", fontsize=11, color=HEAT)
     ax.text(x0 + .05, H + .05 if not top else -.3, "", fontsize=9)
 
 
 ax = fig.add_subplot(gs[2, 0]); setup(ax); si_cell(ax, top=True)
-eqs(fig.add_subplot(gs[2, 1]), "③ 실리콘 윗층 셀 (3D 전도, 냉각 쪽)", [
-    ("h", "각 연결 = 이웃 셀 중심 사이의 평면벽 조각"),
-    ("m", r"$G = \dfrac{k\,A}{L}$   (A: 맞닿은 면적, L: 중심 간 거리)"),
-    ("h", "셀 하나의 열수지 (유한체적): 나가는 열의 합 = 0"),
-    ("m", r"$\sum_{j\in xy} G_{xy}(T_i-T_j) + G_z(T_i-T_i^{\downarrow}) + G_{top}(T_i-T_c) = 0$"),
-    ("m", r"$G_{xy}=k\,\Delta z \quad G_z=\dfrac{k\,\Delta x^2}{\Delta z} \quad G_{top}=\dfrac{\Delta x^2}{R_{top}}$"),
-    ("m", r"$R_{top}=\dfrac{\Delta z/2}{k_{Si}}+\dfrac{t_{TIM}(x,y)}{k_{TIM}}+\dfrac{1}{h}$"),
-    ("t", "①②의 저항이 직렬로 묶여 이 셀의 윗면 경계가 된다"),
+eqs(fig.add_subplot(gs[2, 1]), "③ 실리콘 윗층 절점 (l = 2, 냉각 쪽 경계)", [
+    ("h", r"에너지 평형:  $\dot{E}_{in}-\dot{E}_{out}+\dot{E}_{gen}=0$  (모든 열을 '들어옴'으로 씀)"),
+    ("m", r"$\sum_{4\,\mathrm{xy}} k\Delta y\Delta z\,\dfrac{T_{nb}-T_{m,n,2}}{\Delta x} + k\Delta x\Delta y\,\dfrac{T_{m,n,1}-T_{m,n,2}}{\Delta z} + \Delta x\Delta y\,h_{eq}\,(T_c-T_{m,n,2}) = 0$"),
+    ("h", r"$k\Delta z$로 나누고 $\Delta x=\Delta y$,  $\beta=(\Delta x/\Delta z)^2$:"),
+    ("m", r"$T_{m-1}+T_{m+1}+T_{n-1}+T_{n+1}-4T_{m,n,2}+\beta\,(T_{m,n,1}-T_{m,n,2})+\dfrac{h_{eq}\Delta x^2}{k\Delta z}(T_c-T_{m,n,2})=0$"),
+    ("m", r"$h_{eq}=\dfrac{1}{R_{top}}, \quad R_{top}=\dfrac{\Delta z/2}{k_{Si}}+\dfrac{t_{TIM}(x,y)}{k_{TIM}}+\dfrac{1}{h}$"),
+    ("t", r"$T_{m\pm1}=T_{m\pm1,n,l}$ 등 약식.  윗면 = 대류 경계 ($T_\infty = T_c$). ①②가 직렬로 묶인 등가 대류계수 $h_{eq}$"),
 ])
 
 # ── ④ 실리콘 아랫층 셀 (능동면) ─────────────────────────────────────────
 ax = fig.add_subplot(gs[3, 0]); setup(ax); si_cell(ax, top=False)
-eqs(fig.add_subplot(gs[3, 1]), "④ 실리콘 아랫층 셀 (능동면, 발열 쪽)", [
-    ("h", "아래 경계: 능동면 발열이 셀로 들어옴"),
-    ("m", r"$Q_{in} = q(x,y)\,\Delta x^2$"),
-    ("h", "셀 하나의 열수지: 나가는 열의 합 = 들어온 발열"),
-    ("m", r"$\sum_{j\in xy} G_{xy}(T_i-T_j) + G_z(T_i-T_i^{\uparrow}) = q_i\,\Delta x^2$"),
-    ("h", "구하는 값: 능동면까지 반 칸 두께 평면벽"),
-    ("m", r"$T_j = T_i + q_i\,\dfrac{\Delta z/2}{k_{Si}}$"),
-    ("t", "옆면 4개는 단열 → 가장자리 셀은 이웃 수가 적을 뿐"),
+eqs(fig.add_subplot(gs[3, 1]), "④ 실리콘 아랫층 절점 (l = 1, 능동면, 열유속 경계)", [
+    ("h", r"에너지 평형: 능동면 열유속 $q''$가 들어옴 (발열 $\dot{E}_{gen}$은 실리콘 내부에 없음)"),
+    ("m", r"$\sum_{4\,\mathrm{xy}} k\Delta y\Delta z\,\dfrac{T_{nb}-T_{m,n,1}}{\Delta x} + k\Delta x\Delta y\,\dfrac{T_{m,n,2}-T_{m,n,1}}{\Delta z} + q''_{m,n}\,\Delta x\Delta y = 0$"),
+    ("h", r"$k\Delta z$로 나누고 $\Delta x=\Delta y$,  $\beta=(\Delta x/\Delta z)^2$:"),
+    ("m", r"$T_{m-1}+T_{m+1}+T_{n-1}+T_{n+1}-4T_{m,n,1}+\beta\,(T_{m,n,2}-T_{m,n,1})+\dfrac{q''_{m,n}\Delta x^2}{k\Delta z}=0$"),
+    ("h", "구하는 값: 절점(셀 중심) → 능동면, 반 칸 두께 평면벽"),
+    ("m", r"$T_j = T_{m,n,1} + q''_{m,n}\,\dfrac{\Delta z/2}{k_{Si}}$"),
+    ("t", "옆면 단열 절점: 없는 이웃의 항을 빼면 된다"),
 ])
 
 for y in (.7365, .5005, .2645):
