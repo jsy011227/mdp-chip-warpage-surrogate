@@ -97,3 +97,6 @@ python solver/studies/grid_convergence.py   # 약 3분
 python solver/studies/control_net_order.py  # 약 1분
 ```
 결과 CSV: `solver/studies/results/`, 그림: `figures/b_*.png`
+
+
+계산 원리 설명(수식·손계산 예제): [THEORY.md](THEORY.md)
