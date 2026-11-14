@@ -12,6 +12,8 @@
 - `solver.py` — `solve(x, p)` → `(Tj,max, Tj 지도 64×64)`. 층 수는 `params.yaml`의 `solver.si_layers`
 - 1회 계산 약 35~40 ms (격자 64×64, 실리콘 2층) → 데이터 2,500개 약 1.5분
 
+![](../figures/b_mesh_diagram_v1.png)
+
 ## 축별 비오 수로 정한 단순화
 
 Bi_z = (층 두께 저항) ÷ (그 층에서 냉각수까지의 저항), Bi_xy = (Lc / λ)², λ = √(k·t·R_바깥) = 옆으로 퍼지는 거리.
