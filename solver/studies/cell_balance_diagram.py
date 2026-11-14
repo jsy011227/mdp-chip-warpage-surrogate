@@ -105,8 +105,8 @@ ax.plot([gx + 1.4, gx + .25], [gz0 + .1, gz1], color=K, lw=2.2, alpha=.8)
 ax.text(gx - .1, gz1 + .25, "z", fontsize=10.5); ax.text(gx + 1.65, gz0 - .05, "T", fontsize=10.5, va="center")
 ax.text(gx + .55, -.35, "T가 z에 대해 직선", fontsize=9.5, ha="center", color=(0, 0, 0, .65))
 eqs(fig.add_subplot(gs[1, 1]), "② TIM (위치마다 독립된 1D 막대)", [
-    ("h", "지배식: 발열 없음 + 옆 흐름 없음 → 1차원 전도"),
-    ("m", r"$\dfrac{d}{dz}\left(k_{TIM}\dfrac{dT}{dz}\right)=0 \;\Rightarrow\; T(z)$ 는 직선"),
+    ("h", "지배식: 평면벽 전도 (발열 없음, 옆 흐름 없음 → 정확)"),
+    ("m", r"$R''_{TIM} = \dfrac{t_{TIM}(x,y)}{k_{TIM}}$   (두께 방향 온도는 직선)"),
     ("m", r"$q''(x,y) = \dfrac{k_{TIM}}{t_{TIM}(x,y)}\,\left(T_{Si,top} - T_{cp}\right)$"),
     ("h", "왜 격자로 자르지 않나"),
     ("t", "두께 40~85 μm ≪ 셀 폭 400 μm"),
@@ -149,8 +149,8 @@ def si_cell(ax, top):
 
 ax = fig.add_subplot(gs[2, 0]); setup(ax); si_cell(ax, top=True)
 eqs(fig.add_subplot(gs[2, 1]), "③ 실리콘 윗층 셀 (3D 전도, 냉각 쪽)", [
-    ("h", "지배식 (연속):"),
-    ("m", r"$\nabla\cdot\left(k_{Si}\,\nabla T\right) = 0$"),
+    ("h", "각 연결 = 이웃 셀 중심 사이의 평면벽 조각"),
+    ("m", r"$G = \dfrac{k\,A}{L}$   (A: 맞닿은 면적, L: 중심 간 거리)"),
     ("h", "셀 하나의 열수지 (유한체적): 나가는 열의 합 = 0"),
     ("m", r"$\sum_{j\in xy} G_{xy}(T_i-T_j) + G_z(T_i-T_i^{\downarrow}) + G_{top}(T_i-T_c) = 0$"),
     ("m", r"$G_{xy}=k\,\Delta z \quad G_z=\dfrac{k\,\Delta x^2}{\Delta z} \quad G_{top}=\dfrac{\Delta x^2}{R_{top}}$"),
@@ -161,11 +161,11 @@ eqs(fig.add_subplot(gs[2, 1]), "③ 실리콘 윗층 셀 (3D 전도, 냉각 쪽)
 # ── ④ 실리콘 아랫층 셀 (능동면) ─────────────────────────────────────────
 ax = fig.add_subplot(gs[3, 0]); setup(ax); si_cell(ax, top=False)
 eqs(fig.add_subplot(gs[3, 1]), "④ 실리콘 아랫층 셀 (능동면, 발열 쪽)", [
-    ("h", "경계조건 (능동면, z = 0):"),
-    ("m", r"$-\left.k_{Si}\,\dfrac{\partial T}{\partial z}\,\right|_{z=0} = q(x,y)$"),
+    ("h", "아래 경계: 능동면 발열이 셀로 들어옴"),
+    ("m", r"$Q_{in} = q(x,y)\,\Delta x^2$"),
     ("h", "셀 하나의 열수지: 나가는 열의 합 = 들어온 발열"),
     ("m", r"$\sum_{j\in xy} G_{xy}(T_i-T_j) + G_z(T_i-T_i^{\uparrow}) = q_i\,\Delta x^2$"),
-    ("h", "구하는 값: 셀 중심에서 능동면까지 반 칸 보정"),
+    ("h", "구하는 값: 능동면까지 반 칸 두께 평면벽"),
     ("m", r"$T_j = T_i + q_i\,\dfrac{\Delta z/2}{k_{Si}}$"),
     ("t", "옆면 4개는 단열 → 가장자리 셀은 이웃 수가 적을 뿐"),
 ])
