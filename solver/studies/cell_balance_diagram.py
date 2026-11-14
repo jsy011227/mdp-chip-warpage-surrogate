@@ -109,7 +109,7 @@ eqs(fig.add_subplot(gs[1, 1]), "② TIM (위치마다 독립된 1D 막대)", [
     ("m", r"$\dfrac{d}{dz}\left(k_{TIM}\dfrac{dT}{dz}\right)=0 \;\Rightarrow\; T(z)$ 는 직선"),
     ("m", r"$q''(x,y) = \dfrac{k_{TIM}}{t_{TIM}(x,y)}\,\left(T_{Si,top} - T_{cp}\right)$"),
     ("h", "왜 격자로 자르지 않나"),
-    ("t", "두께 40~85 μm ≪ 셀 폭 400 μm, 횡방향 Bi = 440~800"),
+    ("t", "두께 40~85 μm ≪ 셀 폭 400 μm"),
     ("t", "→ 옆 셀과 주고받는 열이 사실상 0, 1D 해가 정확"),
     ("t", "★ 휨은 여기서만 들어온다: 두께 지도 $t_{TIM}(x,y)$"),
 ])
