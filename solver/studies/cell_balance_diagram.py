@@ -93,7 +93,7 @@ box(ax, x0 + .7, z0, .8, .8, 1.2, fill=.06)                                    #
 zig(ax, P(x0 + 1.1, .4, 0)[0], P(0, .4, .15)[1], P(0, .4, 1.05)[1])
 arrow(ax, P(x0 + 1.1, .4, -.9), P(x0 + 1.1, .4, -.02))
 arrow(ax, P(x0 + 1.1, .4, 1.22), P(x0 + 1.1, .4, 2.05))
-ax.text(P(x0 + 1.1, .4, 1.6)[0] + .15, P(0, .4, 1.6)[1], "$q''$ (위로만)", fontsize=11)
+ax.text(P(x0 + 1.1, .4, 1.6)[0] + .15, P(0, .4, 1.6)[1], "$q''$ → 냉각판", fontsize=11)
 for p in (P(x0 + .25, .4, .6), P(x0 + 1.95, .4, .6)): cross(ax, p)
 ax.annotate("", P(x0 + .65, .4, -.05), P(x0 + .65, .4, 1.25),
             arrowprops=dict(arrowstyle="<->", color=K, alpha=.6, lw=1))
@@ -135,7 +135,7 @@ def si_cell(ax, top):
     ax.text(c[0] + .12, c[1] - .25, "$T_i$", fontsize=11.5)
     if top:
         arrow(ax, P(x0 + W / 2, D / 2, H), P(x0 + W / 2, D / 2, H + 1.0), color=COOL)
-        ax.text(P(x0 + W / 2, D / 2, H + .6)[0] + .15, P(0, D / 2, H + .6)[1], "$G_{top}$ → TIM·냉각판", fontsize=11, color=COOL)
+        ax.text(P(x0 + W / 2, D / 2, H + .6)[0] + .15, P(0, D / 2, H + .6)[1], "$G_{top}$ → TIM", fontsize=11, color=COOL)
         arrow(ax, P(x0 + W / 2, D / 2, -1.05), P(x0 + W / 2, D / 2, 0))
         ax.text(P(x0 + W / 2, D / 2, -.6)[0] + .15, P(0, D / 2, -.6)[1], "$G_z$ (아랫층에서)", fontsize=11)
     else:
