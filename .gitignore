@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.DS_Store
+# 큰 데이터는 git에 올리지 않음 (data/README.md 참고)
+data/**/*.npy
+data/**/*.npz
+models/**/*.pt
+models/**/*.pkl
+# Ansys 작업 파일
+*.wbpj
+*_files/
+.pytest_cache/
