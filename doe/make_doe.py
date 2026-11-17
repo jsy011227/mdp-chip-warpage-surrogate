@@ -48,7 +48,7 @@ def main():
     (out / "split.json").write_text(json.dumps(split(a.n, p)))
     try: rev = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
     except Exception: rev = "unknown"
-    meta = {"n": a.n, "grid": g, "params_version": p["version"], "git": rev, "inputs": input_names(p),
+    meta = {"n": a.n, "grid": g, "si_layers": p["solver"].get("si_layers", 1), "params_version": p["version"], "git": rev, "inputs": input_names(p),
             "created": time.strftime("%Y-%m-%d %H:%M"), "seconds": round(time.time() - t0, 1)}
     (out / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     print(f"done: {a.n} samples, Tmax {Tmax.min():.1f}–{Tmax.max():.1f} °C, {meta['seconds']} s → {out}")
